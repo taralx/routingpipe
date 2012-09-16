@@ -9,6 +9,7 @@ import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.ForgeSubscribe;
 import net.minecraftforge.oredict.OreDictionary.OreRegisterEvent;
+import buildcraft.core.utils.Localization;
 import buildcraft.transport.BlockGenericPipe;
 import buildcraft.transport.ItemPipe;
 import cpw.mods.fml.common.FMLCommonHandler;
@@ -25,7 +26,7 @@ import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
-@Mod(modid = "RoutingPipe", version = "1.0", name = "Routing Pipe", dependencies = "required-after:BuildCraft|Transport")
+@Mod(modid = "RoutingPipe", version = "1.0.1", name = "Routing Pipe", dependencies = "required-after:BuildCraft|Transport")
 @NetworkMod(clientSideRequired = true)
 public class Main {
 	public static final int GUI_ID = 1;
@@ -55,6 +56,8 @@ public class Main {
 
 		MinecraftForge.EVENT_BUS.register(this);
 		NetworkRegistry.instance().registerGuiHandler(this, new GuiHandler());
+
+		Localization.addLocalization("/lang/routingpipe/", "en_US");
 	}
 
 	@Init
