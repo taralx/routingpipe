@@ -1,0 +1,17 @@
+[{
+  "modid": "RoutingPipe",
+  "name": "Routing Pipe",
+  "description": "Adds the routing pipe to BuildCraft, to make item routing easier.",
+  "version": "1.0",
+  "credits": "",
+  "logoFile": "",
+  "mcversion": "",
+  "url": "",
+  "updateUrl": "",
+  "authors": [ "Taral (aka taralx)" ],
+  "parent": "",
+  "screenshots": [],
+  "dependencies": [
+     "BuildCraft|Transport"
+  ]
+}]
