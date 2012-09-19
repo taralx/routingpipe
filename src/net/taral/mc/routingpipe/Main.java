@@ -33,7 +33,7 @@ public class Main {
 
 	public static ItemPipe routingPipe;
 
-	@Instance(value = "RoutingPipe")
+	@Instance("RoutingPipe")
 	public static Main instance;
 
 	@PreInit
