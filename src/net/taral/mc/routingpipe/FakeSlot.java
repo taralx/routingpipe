@@ -1,6 +1,5 @@
 package net.taral.mc.routingpipe;
 
-import net.minecraft.src.IInventory;
 import net.minecraft.src.ItemStack;
 import net.minecraft.src.Slot;
 

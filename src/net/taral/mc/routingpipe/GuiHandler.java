@@ -1,10 +1,9 @@
 package net.taral.mc.routingpipe;
 
-import buildcraft.transport.TileGenericPipe;
-import buildcraft.transport.pipes.PipeLogicDiamond;
 import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.TileEntity;
 import net.minecraft.src.World;
+import buildcraft.transport.TileGenericPipe;
 import cpw.mods.fml.common.network.IGuiHandler;
 
 public class GuiHandler implements IGuiHandler {

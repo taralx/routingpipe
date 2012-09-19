@@ -65,8 +65,10 @@ public class Main {
 		if (routingPipe == null)
 			return;
 
-		GameRegistry.addRecipe(new ItemStack(routingPipe, 8), "DGI", 'D', Item.diamond, 'G', Block.glass, 'I', Item.ingotIron);
-		GameRegistry.addRecipe(new ItemStack(routingPipe, 8), "IGD", 'D', Item.diamond, 'G', Block.glass, 'I', Item.ingotIron);
+		GameRegistry.addRecipe(new ItemStack(routingPipe, 8), "DGI", 'D', Item.diamond, 'G', Block.glass, 'I',
+				Item.ingotIron);
+		GameRegistry.addRecipe(new ItemStack(routingPipe, 8), "IGD", 'D', Item.diamond, 'G', Block.glass, 'I',
+				Item.ingotIron);
 
 		if (FMLCommonHandler.instance().getSide() == Side.CLIENT)
 			new ClientInit();

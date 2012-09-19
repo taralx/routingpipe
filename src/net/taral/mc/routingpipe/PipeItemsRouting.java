@@ -2,8 +2,6 @@ package net.taral.mc.routingpipe;
 
 import java.util.LinkedList;
 
-import net.minecraft.src.NBTTagCompound;
-
 import buildcraft.api.core.Orientations;
 import buildcraft.api.core.Position;
 import buildcraft.api.transport.IPipedItem;

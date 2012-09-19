@@ -5,7 +5,6 @@ import net.minecraft.src.InventoryPlayer;
 
 import org.lwjgl.opengl.GL11;
 
-import buildcraft.api.core.Orientations;
 import buildcraft.transport.TileGenericPipe;
 
 public class GuiRoutingPipe extends GuiContainer {

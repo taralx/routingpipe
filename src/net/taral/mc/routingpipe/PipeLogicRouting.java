@@ -4,12 +4,7 @@ import net.minecraft.src.Block;
 import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.ItemStack;
 import net.minecraft.src.NBTTagCompound;
-import buildcraft.BuildCraftCore;
-import buildcraft.BuildCraftTransport;
 import buildcraft.api.core.Orientations;
-import buildcraft.api.core.SafeTimeTracker;
-import buildcraft.core.GuiIds;
-import buildcraft.core.proxy.CoreProxy;
 import buildcraft.transport.BlockGenericPipe;
 import buildcraft.transport.pipes.PipeLogic;
 
@@ -30,14 +25,12 @@ public class PipeLogicRouting extends PipeLogic {
 	public boolean blockActivated(EntityPlayer player) {
 		ItemStack currentEquippedItem = player.getCurrentEquippedItem();
 
-		if (currentEquippedItem != null
-				&& currentEquippedItem.itemID < Block.blocksList.length
+		if (currentEquippedItem != null && currentEquippedItem.itemID < Block.blocksList.length
 				&& Block.blocksList[currentEquippedItem.itemID] instanceof BlockGenericPipe)
 			return false;
 
 		if (!container.worldObj.isRemote)
-			player.openGui(Main.instance, Main.GUI_ID,
-					container.worldObj, container.xCoord, container.yCoord,
+			player.openGui(Main.instance, Main.GUI_ID, container.worldObj, container.xCoord, container.yCoord,
 					container.zCoord);
 
 		return true;
