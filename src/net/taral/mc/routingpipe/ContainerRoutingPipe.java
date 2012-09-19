@@ -2,13 +2,10 @@ package net.taral.mc.routingpipe;
 
 import net.minecraft.src.Container;
 import net.minecraft.src.EntityPlayer;
-import net.minecraft.src.ICrafting;
 import net.minecraft.src.InventoryPlayer;
 import net.minecraft.src.ItemStack;
 import net.minecraft.src.Slot;
 import buildcraft.api.core.Orientations;
-import cpw.mods.fml.common.Side;
-import cpw.mods.fml.common.asm.SideOnly;
 
 public class ContainerRoutingPipe extends Container {
 
@@ -44,39 +41,11 @@ public class ContainerRoutingPipe extends Container {
 					o = o + 5;
 				}
 				logic.orientations[slotNumber - 36] = Orientations.values()[o % 6];
+				logic.worldObj.markBlockNeedsUpdate(logic.xCoord, logic.yCoord, logic.zCoord);
 			}
 			return null;
 		}
 		return super.slotClick(slotNumber, button, shiftPresssed, player);
-	}
-
-	@Override
-	public void updateCraftingResults() {
-		super.updateCraftingResults();
-
-		int data = 0;
-		for (Orientations o : logic.orientations) {
-			data = (data << 4) | o.ordinal();
-		}
-
-		for (Object crafter : crafters) {
-			((ICrafting) crafter).updateCraftingInventoryInfo(this, 0, data);
-		}
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void updateProgressBar(int id, int data) {
-		if (id != 0) {
-			super.updateProgressBar(id, data);
-			return;
-		}
-
-		int n = logic.orientations.length;
-		for (int i = n - 1; i >= 0; i--) {
-			logic.orientations[i] = Orientations.values()[data & 15];
-			data = data >> 4;
-		}
 	}
 
 }

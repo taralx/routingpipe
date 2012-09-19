@@ -1,16 +1,20 @@
 package net.taral.mc.routingpipe;
 
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
 import java.util.LinkedList;
 
 import buildcraft.api.core.Orientations;
 import buildcraft.api.core.Position;
 import buildcraft.api.transport.IPipedItem;
+import buildcraft.core.network.IClientState;
 import buildcraft.core.utils.Utils;
 import buildcraft.transport.IPipeTransportItemsHook;
 import buildcraft.transport.Pipe;
 import buildcraft.transport.PipeTransportItems;
 
-public class PipeItemsRouting extends Pipe implements IPipeTransportItemsHook {
+public class PipeItemsRouting extends Pipe implements IPipeTransportItemsHook, IClientState {
 
 	public PipeItemsRouting(int itemID) {
 		super(new PipeTransportItems(), new PipeLogicRouting(), itemID);
@@ -60,6 +64,22 @@ public class PipeItemsRouting extends Pipe implements IPipeTransportItemsHook {
 
 		if (item.getSpeed() < Utils.pipeNormalSpeed)
 			item.setSpeed(Utils.pipeNormalSpeed);
+	}
+
+	@Override
+	public void writeData(DataOutputStream data) throws IOException {
+		for (Orientations o : ((PipeLogicRouting) logic).orientations) {
+			data.writeByte(o.ordinal());
+		}
+	}
+
+	@Override
+	public void readData(DataInputStream data) throws IOException {
+		Orientations[] values = Orientations.values();
+		Orientations[] orientations = ((PipeLogicRouting) logic).orientations;
+		for (int i = 0; i < orientations.length; i++) {
+			orientations[i] = values[data.readByte()];
+		}
 	}
 
 }
