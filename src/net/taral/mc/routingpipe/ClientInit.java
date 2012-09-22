@@ -6,7 +6,12 @@ import buildcraft.transport.TransportProxyClient;
 public class ClientInit {
 
 	public ClientInit() {
-		MinecraftForgeClient.registerItemRenderer(Main.routingPipe.shiftedIndex, TransportProxyClient.pipeItemRenderer);
+		if (Main.routingPipe != null)
+			MinecraftForgeClient.registerItemRenderer(Main.routingPipe.shiftedIndex,
+					TransportProxyClient.pipeItemRenderer);
+		if (Main.insertionPipe != null)
+			MinecraftForgeClient.registerItemRenderer(Main.insertionPipe.shiftedIndex,
+					TransportProxyClient.pipeItemRenderer);
 	}
 
 }
