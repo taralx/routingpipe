@@ -61,13 +61,13 @@ public class Main {
 		if (routingPipeId != 0) {
 			routingPipe = BlockGenericPipe.registerPipe(routingPipeId, PipeItemsRouting.class);
 			routingPipe.setItemName("routingPipe");
-			LanguageRegistry.addName(routingPipe, "Routing Pipe");
+			LanguageRegistry.addName(routingPipe, "Routing Transport Pipe");
 		}
 
 		if (insertionPipeId != 0) {
 			insertionPipe = BlockGenericPipe.registerPipe(insertionPipeId, PipeItemsInsertion.class);
 			insertionPipe.setItemName("insertionPipe");
-			LanguageRegistry.addName(insertionPipe, "Insertion Pipe");
+			LanguageRegistry.addName(insertionPipe, "Insertion Transport Pipe");
 		}
 
 		NetworkRegistry.instance().registerGuiHandler(this, new GuiHandler());
