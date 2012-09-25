@@ -30,7 +30,7 @@ import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
-@Mod(modid = "RoutingPipe", version = "1.1.1", name = "Routing Pipe", dependencies = "required-after:BuildCraft|Transport")
+@Mod(modid = "RoutingPipe", version = "1.1.2", name = "Routing Pipe", dependencies = "required-after:BuildCraft|Transport")
 @NetworkMod(clientSideRequired = true, versionBounds = "[1.1.1,)")
 public class Main {
 	public static final int GUI_ID = 1;
