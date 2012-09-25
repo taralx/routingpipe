@@ -12,6 +12,7 @@ public class ClientInit {
 		if (Main.insertionPipe != null)
 			MinecraftForgeClient.registerItemRenderer(Main.insertionPipe.shiftedIndex,
 					TransportProxyClient.pipeItemRenderer);
+		MinecraftForgeClient.preloadTexture("/gfx/routingpipe/blocks/blocks.png");
 	}
 
 }
