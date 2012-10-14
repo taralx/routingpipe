@@ -37,6 +37,7 @@ public class Main {
 
 	public static ItemPipe routingPipe;
 	public static ItemPipe insertionPipe;
+	public static BlockPipeAdaptor pipeAdaptor;
 
 	@Instance("RoutingPipe")
 	public static Main instance;
@@ -45,12 +46,14 @@ public class Main {
 	public void preInitialize(FMLPreInitializationEvent evt) {
 		int routingPipeId = 24799;
 		int insertionPipeId = 24798;
+		int pipeAdaptorId = 3200;
 
 		Configuration cfg = new Configuration(evt.getSuggestedConfigurationFile());
 		try {
 			cfg.load();
-			routingPipeId = cfg.getOrCreateIntProperty("routingPipe", "item", routingPipeId).getInt();
-			insertionPipeId = cfg.getOrCreateIntProperty("insertionPipeId", "item", insertionPipeId).getInt();
+			routingPipeId = cfg.get("item", "routingPipe", routingPipeId).getInt();
+			insertionPipeId = cfg.get("item", "insertionPipeId", insertionPipeId).getInt();
+			pipeAdaptorId = cfg.getBlock("pipeAdaptor", pipeAdaptorId).getInt();
 		} catch (Exception e) {
 			FMLLog.log(Level.SEVERE, e, "Routing Pipe has a problem loading its configuration.");
 			Throwables.propagate(e);
@@ -61,18 +64,20 @@ public class Main {
 		if (routingPipeId != 0) {
 			routingPipe = BlockGenericPipe.registerPipe(routingPipeId, PipeItemsRouting.class);
 			routingPipe.setItemName("routingPipe");
-			LanguageRegistry.addName(routingPipe, "Routing Transport Pipe");
 		}
 
 		if (insertionPipeId != 0) {
 			insertionPipe = BlockGenericPipe.registerPipe(insertionPipeId, PipeItemsInsertion.class);
 			insertionPipe.setItemName("insertionPipe");
-			LanguageRegistry.addName(insertionPipe, "Insertion Transport Pipe");
+		}
+
+		if (pipeAdaptorId != 0) {
+			pipeAdaptor = new BlockPipeAdaptor(pipeAdaptorId);
+			GameRegistry.registerTileEntity(TilePipeAdaptor.class, "net.taral.mc.routingpipe.PipeAdaptor");
 		}
 
 		NetworkRegistry.instance().registerGuiHandler(this, new GuiHandler());
 
-		Localization.addLocalization("/lang/routingpipe/", "en_US");
 	}
 
 	@Init
@@ -87,17 +92,20 @@ public class Main {
 			GameRegistry.addRecipe(new ItemStack(insertionPipe, 8), " R ", "SGS", 'R', Item.redstone, 'S', Block.stone,
 					'G', Block.glass);
 		}
+		if (pipeAdaptor != null) {
+			GameRegistry
+					.addRecipe(new ItemStack(pipeAdaptor), "WWW", "WGW", "WWW", 'W', Block.planks, 'G', Block.glass);
+		}
 
 		if (FMLCommonHandler.instance().getSide() == Side.CLIENT) {
-			new ClientInit();
+			new ClientProxy();
 		}
 	}
 
 	@PostInit
 	public void postInitialize(FMLPostInitializationEvent evt) {
 		if (routingPipe != null) {
-			CraftingManager.getInstance().getRecipeList()
-					.add(new ShapedOreRecipe(routingPipe, "BGB", 'B', "ingotBronze", 'G', Block.glass));
+			GameRegistry.addRecipe(new ShapedOreRecipe(routingPipe, "BGB", 'B', "ingotBronze", 'G', Block.glass));
 		}
 	}
 }
