@@ -15,7 +15,7 @@ public class GuiRoutingPipe extends GuiContainer {
 	public GuiRoutingPipe(InventoryPlayer playerInventory, TileGenericPipe tile) {
 		super(new ContainerRoutingPipe(playerInventory, (PipeLogicRouting) tile.pipe.logic));
 		this.playerInventory = playerInventory;
-		this.logic = (PipeLogicRouting) tile.pipe.logic;
+		logic = (PipeLogicRouting) tile.pipe.logic;
 
 		xSize = 176;
 		ySize = 222;
@@ -33,8 +33,9 @@ public class GuiRoutingPipe extends GuiContainer {
 		for (int i = 0; i < logic.orientations.length; i++) {
 			int o = logic.orientations[i].ordinal();
 
-			if (o <= 6)
+			if (o <= 6) {
 				drawTexturedModalRect(x + 112, y + 18 + i * 18, xSize + 1, o * 18 + 1, 16, 16);
+			}
 		}
 	}
 

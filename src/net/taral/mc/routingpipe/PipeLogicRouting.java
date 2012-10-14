@@ -29,9 +29,10 @@ public class PipeLogicRouting extends PipeLogic {
 				&& Block.blocksList[currentEquippedItem.itemID] instanceof BlockGenericPipe)
 			return false;
 
-		if (!container.worldObj.isRemote)
+		if (!container.worldObj.isRemote) {
 			player.openGui(Main.instance, Main.GUI_ID, container.worldObj, container.xCoord, container.yCoord,
 					container.zCoord);
+		}
 
 		return true;
 	}

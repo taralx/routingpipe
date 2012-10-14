@@ -14,15 +14,19 @@ public class ContainerRoutingPipe extends Container {
 	public ContainerRoutingPipe(InventoryPlayer playerInventory, PipeLogicRouting logic) {
 		this.logic = logic;
 
-		for (int slot = 0; slot < 9; slot++)
+		for (int slot = 0; slot < 9; slot++) {
 			addSlotToContainer(new Slot(playerInventory, slot, 8 + slot * 18, 198));
+		}
 
-		for (int row = 0; row < 3; row++)
-			for (int col = 0; col < 9; col++)
+		for (int row = 0; row < 3; row++) {
+			for (int col = 0; col < 9; col++) {
 				addSlotToContainer(new Slot(playerInventory, col + row * 9 + 9, 8 + col * 18, 140 + row * 18));
+			}
+		}
 
-		for (int o = 0; o < 6; o++)
+		for (int o = 0; o < 6; o++) {
 			addSlotToContainer(new FakeSlot(o + 36, 112, 18 + o * 18));
+		}
 	}
 
 	@Override

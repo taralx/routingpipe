@@ -29,9 +29,8 @@ public class PipeItemsRouting extends Pipe implements IPipeTransportItemsHook, I
 
 	@Override
 	public int getTextureIndex(Orientations direction) {
-		if (direction == Orientations.Unknown) {
+		if (direction == Orientations.Unknown)
 			return 0;
-		}
 		return direction.ordinal() + 1;
 	}
 
@@ -62,8 +61,9 @@ public class PipeItemsRouting extends Pipe implements IPipeTransportItemsHook, I
 	public void readjustSpeed(IPipedItem item) {
 		// Minimum speed only
 
-		if (item.getSpeed() < Utils.pipeNormalSpeed)
+		if (item.getSpeed() < Utils.pipeNormalSpeed) {
 			item.setSpeed(Utils.pipeNormalSpeed);
+		}
 	}
 
 	@Override

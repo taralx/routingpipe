@@ -6,12 +6,14 @@ import buildcraft.transport.TransportProxyClient;
 public class ClientInit {
 
 	public ClientInit() {
-		if (Main.routingPipe != null)
+		if (Main.routingPipe != null) {
 			MinecraftForgeClient.registerItemRenderer(Main.routingPipe.shiftedIndex,
 					TransportProxyClient.pipeItemRenderer);
-		if (Main.insertionPipe != null)
+		}
+		if (Main.insertionPipe != null) {
 			MinecraftForgeClient.registerItemRenderer(Main.insertionPipe.shiftedIndex,
 					TransportProxyClient.pipeItemRenderer);
+		}
 		MinecraftForgeClient.preloadTexture("/gfx/routingpipe/blocks/blocks.png");
 	}
 

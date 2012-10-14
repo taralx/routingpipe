@@ -66,11 +66,13 @@ public class PipeItemsInsertion extends Pipe implements IPipeTransportItemsHook 
 
 	@Override
 	public void readjustSpeed(IPipedItem item) {
-		if (item.getSpeed() > Utils.pipeNormalSpeed)
+		if (item.getSpeed() > Utils.pipeNormalSpeed) {
 			item.setSpeed(item.getSpeed() - Utils.pipeNormalSpeed / 2.0F);
+		}
 
-		if (item.getSpeed() < Utils.pipeNormalSpeed)
+		if (item.getSpeed() < Utils.pipeNormalSpeed) {
 			item.setSpeed(Utils.pipeNormalSpeed);
+		}
 	}
 
 }

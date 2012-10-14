@@ -88,8 +88,9 @@ public class Main {
 					'G', Block.glass);
 		}
 
-		if (FMLCommonHandler.instance().getSide() == Side.CLIENT)
+		if (FMLCommonHandler.instance().getSide() == Side.CLIENT) {
 			new ClientInit();
+		}
 	}
 
 	@PostInit
