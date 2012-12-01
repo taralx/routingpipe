@@ -5,7 +5,7 @@ import java.util.LinkedList;
 
 import net.minecraft.src.ItemStack;
 import net.minecraft.src.TileEntity;
-import buildcraft.api.core.Orientations;
+import net.minecraftforge.common.ForgeDirection;
 import buildcraft.api.core.Position;
 import buildcraft.api.transport.IPipedItem;
 import buildcraft.core.inventory.ITransactor;
@@ -29,16 +29,16 @@ public class PipeItemsInsertion extends Pipe implements IPipeTransportItemsHook 
 	}
 
 	@Override
-	public int getTextureIndex(Orientations direction) {
+	public int getTextureIndex(ForgeDirection direction) {
 		return 16;
 	}
 
 	@Override
-	public LinkedList<Orientations> filterPossibleMovements(LinkedList<Orientations> possibleOrientations,
+	public LinkedList<ForgeDirection> filterPossibleMovements(LinkedList<ForgeDirection> possibleForgeDirection,
 			Position pos, IPipedItem item) {
-		Iterator<Orientations> iterator = possibleOrientations.iterator();
+		Iterator<ForgeDirection> iterator = possibleForgeDirection.iterator();
 		while (iterator.hasNext()) {
-			Orientations o = iterator.next();
+			ForgeDirection o = iterator.next();
 			TileEntity tile = container.getTile(o);
 
 			if (tile instanceof TileGenericPipe) {
@@ -47,21 +47,21 @@ public class PipeItemsInsertion extends Pipe implements IPipeTransportItemsHook 
 
 			ITransactor transactor = Transactor.getTransactorFor(tile);
 			ItemStack stack = item.getItemStack();
-			ItemStack added = transactor.add(stack, o.reverse(), true);
+			ItemStack added = transactor.add(stack, o.getOpposite(), true);
 			stack.stackSize -= added.stackSize;
 			if (stack.stackSize == 0) {
 				((PipeTransportItems) transport).scheduleRemoval(item);
-				possibleOrientations.clear();
+				possibleForgeDirection.clear();
 				break;
 			}
 			item.setItemStack(stack);
 			iterator.remove();
 		}
-		return possibleOrientations;
+		return possibleForgeDirection;
 	}
 
 	@Override
-	public void entityEntered(IPipedItem item, Orientations orientation) {
+	public void entityEntered(IPipedItem item, ForgeDirection orientation) {
 	}
 
 	@Override

@@ -1,6 +1,5 @@
 package net.taral.mc.routingpipe;
 
-import buildcraft.api.core.Orientations;
 import net.minecraft.src.BlockContainer;
 import net.minecraft.src.CreativeTabs;
 import net.minecraft.src.Material;

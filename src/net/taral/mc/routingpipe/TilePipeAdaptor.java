@@ -1,16 +1,12 @@
 package net.taral.mc.routingpipe;
 
-import javax.swing.plaf.basic.BasicInternalFrameTitlePane.MaximizeAction;
-
-import cpw.mods.fml.common.FMLLog;
-
-import buildcraft.api.core.Orientations;
-import buildcraft.core.utils.Utils;
 import net.minecraft.src.EntityItem;
 import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.IInventory;
 import net.minecraft.src.ItemStack;
 import net.minecraft.src.TileEntity;
+import net.minecraftforge.common.ForgeDirection;
+import buildcraft.core.utils.Utils;
 
 public class TilePipeAdaptor extends TileEntity implements IInventory {
 
@@ -19,7 +15,7 @@ public class TilePipeAdaptor extends TileEntity implements IInventory {
 		if (worldObj.isRemote)
 			return;
 
-		if (Utils.addToRandomPipeEntry(this, Orientations.Unknown, stack))
+		if (Utils.addToRandomPipeEntry(this, ForgeDirection.UNKNOWN, stack))
 			return;
 
 		double theta = worldObj.rand.nextFloat() * 2 * Math.PI;

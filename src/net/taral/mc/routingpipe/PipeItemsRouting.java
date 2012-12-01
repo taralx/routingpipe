@@ -5,7 +5,8 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.LinkedList;
 
-import buildcraft.api.core.Orientations;
+import net.minecraftforge.common.ForgeDirection;
+
 import buildcraft.api.core.Position;
 import buildcraft.api.transport.IPipedItem;
 import buildcraft.core.network.IClientState;
@@ -28,33 +29,33 @@ public class PipeItemsRouting extends Pipe implements IPipeTransportItemsHook, I
 	}
 
 	@Override
-	public int getTextureIndex(Orientations direction) {
-		if (direction == Orientations.Unknown)
+	public int getTextureIndex(ForgeDirection direction) {
+		if (direction == ForgeDirection.UNKNOWN)
 			return 0;
 		return direction.ordinal() + 1;
 	}
 
 	@Override
-	public LinkedList<Orientations> filterPossibleMovements(LinkedList<Orientations> possibleOrientations,
+	public LinkedList<ForgeDirection> filterPossibleMovements(LinkedList<ForgeDirection> possibleForgeDirection,
 			Position pos, IPipedItem item) {
-		Orientations cameFrom = pos.orientation.reverse();
+		ForgeDirection cameFrom = pos.orientation.getOpposite();
 
-		if (cameFrom == Orientations.Unknown)
-			return possibleOrientations;
+		if (cameFrom == ForgeDirection.UNKNOWN)
+			return possibleForgeDirection;
 
 		PipeLogicRouting routingLogic = (PipeLogicRouting) logic;
 
-		Orientations newOrientation = routingLogic.orientations[cameFrom.ordinal()];
-		if (newOrientation == cameFrom || possibleOrientations.contains(newOrientation)) {
-			possibleOrientations.clear();
-			possibleOrientations.add(newOrientation);
+		ForgeDirection newOrientation = routingLogic.directions[cameFrom.ordinal()];
+		if (newOrientation == cameFrom || possibleForgeDirection.contains(newOrientation)) {
+			possibleForgeDirection.clear();
+			possibleForgeDirection.add(newOrientation);
 		}
 
-		return possibleOrientations;
+		return possibleForgeDirection;
 	}
 
 	@Override
-	public void entityEntered(IPipedItem item, Orientations orientation) {
+	public void entityEntered(IPipedItem item, ForgeDirection orientation) {
 	}
 
 	@Override
@@ -68,17 +69,16 @@ public class PipeItemsRouting extends Pipe implements IPipeTransportItemsHook, I
 
 	@Override
 	public void writeData(DataOutputStream data) throws IOException {
-		for (Orientations o : ((PipeLogicRouting) logic).orientations) {
+		for (ForgeDirection o : ((PipeLogicRouting) logic).directions) {
 			data.writeByte(o.ordinal());
 		}
 	}
 
 	@Override
 	public void readData(DataInputStream data) throws IOException {
-		Orientations[] values = Orientations.values();
-		Orientations[] orientations = ((PipeLogicRouting) logic).orientations;
-		for (int i = 0; i < orientations.length; i++) {
-			orientations[i] = values[data.readByte()];
+		ForgeDirection[] directions = ((PipeLogicRouting) logic).directions;
+		for (int i = 0; i < directions.length; i++) {
+			directions[i] = ForgeDirection.getOrientation(data.readByte());
 		}
 	}
 

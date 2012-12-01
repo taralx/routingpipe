@@ -5,7 +5,7 @@ import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.InventoryPlayer;
 import net.minecraft.src.ItemStack;
 import net.minecraft.src.Slot;
-import buildcraft.api.core.Orientations;
+import net.minecraftforge.common.ForgeDirection;
 
 public class ContainerRoutingPipe extends Container {
 
@@ -35,21 +35,21 @@ public class ContainerRoutingPipe extends Container {
 	}
 
 	@Override
-	public ItemStack slotClick(int slotNumber, int button, boolean shiftPresssed, EntityPlayer player) {
+	public ItemStack slotClick(int slotNumber, int button, int shiftPressed, EntityPlayer player) {
 		if (slotNumber >= 36) {
 			if (!player.worldObj.isRemote) {
-				int o = logic.orientations[slotNumber - 36].ordinal();
+				int o = logic.directions[slotNumber - 36].ordinal();
 				if (button == 0) {
 					o = o + 1;
 				} else {
 					o = o + 5;
 				}
-				logic.orientations[slotNumber - 36] = Orientations.values()[o % 6];
-				logic.worldObj.markBlockNeedsUpdate(logic.xCoord, logic.yCoord, logic.zCoord);
+				logic.directions[slotNumber - 36] = ForgeDirection.getOrientation(o % 6);
+				logic.worldObj.markBlockForUpdate(logic.xCoord, logic.yCoord, logic.zCoord);
 			}
 			return null;
 		}
-		return super.slotClick(slotNumber, button, shiftPresssed, player);
+		return super.slotClick(slotNumber, button, shiftPressed, player);
 	}
 
 }

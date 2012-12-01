@@ -30,8 +30,8 @@ public class GuiRoutingPipe extends GuiContainer {
 		int y = (height - ySize) / 2;
 		drawTexturedModalRect(x, y, 0, 0, xSize, ySize);
 
-		for (int i = 0; i < logic.orientations.length; i++) {
-			int o = logic.orientations[i].ordinal();
+		for (int i = 0; i < logic.directions.length; i++) {
+			int o = logic.directions[i].ordinal();
 
 			if (o <= 6) {
 				drawTexturedModalRect(x + 112, y + 18 + i * 18, xSize + 1, o * 18 + 1, 16, 16);

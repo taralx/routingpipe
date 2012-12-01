@@ -4,20 +4,20 @@ import net.minecraft.src.Block;
 import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.ItemStack;
 import net.minecraft.src.NBTTagCompound;
-import buildcraft.api.core.Orientations;
+import net.minecraftforge.common.ForgeDirection;
 import buildcraft.transport.BlockGenericPipe;
 import buildcraft.transport.pipes.PipeLogic;
 
 public class PipeLogicRouting extends PipeLogic {
 
-	public Orientations[] orientations;
+	public ForgeDirection[] directions;
 
 	public PipeLogicRouting() {
 		super();
 
-		orientations = Orientations.dirs();
+		directions = new ForgeDirection[6];
 		for (int i = 0; i < 6; i++) {
-			orientations[i] = orientations[i].reverse();
+			directions[i] = ForgeDirection.getOrientation(i).getOpposite();
 		}
 	}
 
@@ -41,8 +41,8 @@ public class PipeLogicRouting extends PipeLogic {
 	public void readFromNBT(NBTTagCompound nbt) {
 		super.readFromNBT(nbt);
 
-		for (int i = 0; i < orientations.length; i++) {
-			orientations[i] = Orientations.values()[nbt.getInteger("orientations[" + i + "]")];
+		for (int i = 0; i < directions.length; i++) {
+			directions[i] = ForgeDirection.getOrientation(nbt.getInteger("directions[" + i + "]"));
 		}
 	}
 
@@ -50,8 +50,8 @@ public class PipeLogicRouting extends PipeLogic {
 	public void writeToNBT(NBTTagCompound nbt) {
 		super.writeToNBT(nbt);
 
-		for (int i = 0; i < orientations.length; i++) {
-			nbt.setInteger("orientations[" + i + "]", orientations[i].ordinal());
+		for (int i = 0; i < directions.length; i++) {
+			nbt.setInteger("orientations[" + i + "]", directions[i].ordinal());
 		}
 	}
 
