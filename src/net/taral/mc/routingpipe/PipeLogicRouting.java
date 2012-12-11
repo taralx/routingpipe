@@ -51,7 +51,7 @@ public class PipeLogicRouting extends PipeLogic {
 		super.writeToNBT(nbt);
 
 		for (int i = 0; i < directions.length; i++) {
-			nbt.setInteger("orientations[" + i + "]", directions[i].ordinal());
+			nbt.setInteger("directions[" + i + "]", directions[i].ordinal());
 		}
 	}
 
