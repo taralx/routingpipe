@@ -2,10 +2,9 @@ package net.taral.mc.routingpipe;
 
 import java.util.logging.Level;
 
-import net.minecraft.src.Block;
-import net.minecraft.src.CraftingManager;
-import net.minecraft.src.Item;
-import net.minecraft.src.ItemStack;
+import net.minecraft.block.Block;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import buildcraft.core.utils.Localization;
@@ -21,7 +20,6 @@ import cpw.mods.fml.common.Mod.Init;
 import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.Mod.PostInit;
 import cpw.mods.fml.common.Mod.PreInit;
-import cpw.mods.fml.common.Side;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
@@ -29,8 +27,9 @@ import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
+import cpw.mods.fml.relauncher.Side;
 
-@Mod(modid = "RoutingPipe", version = "1.1.4b", name = "Routing Pipe", dependencies = "required-after:BuildCraft|Transport@[3.2.1,)")
+@Mod(modid = "RoutingPipe", version = "1.1.5", name = "Routing Pipe", dependencies = "required-after:BuildCraft|Transport@[3.3.0,)")
 @NetworkMod(clientSideRequired = true, versionBounds = "[1.1.4,)")
 public class Main {
 	public static final int GUI_ID = 1;

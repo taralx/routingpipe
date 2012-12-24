@@ -2,7 +2,7 @@ package net.taral.mc.routingpipe;
 
 import java.net.URL;
 
-import net.minecraft.src.StringTranslate;
+import net.minecraft.util.StringTranslate;
 import net.minecraftforge.client.MinecraftForgeClient;
 import buildcraft.core.utils.Localization;
 import buildcraft.transport.TransportProxyClient;

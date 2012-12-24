@@ -1,7 +1,7 @@
 package net.taral.mc.routingpipe;
 
-import net.minecraft.src.ItemStack;
-import net.minecraft.src.Slot;
+import net.minecraft.inventory.Slot;
+import net.minecraft.item.ItemStack;
 
 public class FakeSlot extends Slot {
 
